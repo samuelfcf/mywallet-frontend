@@ -20,6 +20,15 @@ const signUp = async (req) => {
   return await axios.post(`${BASE_URL}/sign-up`, body);
 }
 
+const logIn = async (req) => {
+  const body = {
+    email: req.email,
+    password: req.password
+  }
+  return await axios.post(`${BASE_URL}/log-in`, body);
+}
+
 export {
   signUp,
+  logIn,
 }

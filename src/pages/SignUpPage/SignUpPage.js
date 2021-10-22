@@ -42,7 +42,6 @@ const SignUpPage = () => {
         console.log(res)
       })
       .catch(err => {
-        console.log(err.response);
         if (err.response.status === 409) return alert("Usuário já cadastrado.")
         if (err.response.status === 400) return alert("Preencha corretamente os campos.")
       });
