@@ -36,6 +36,10 @@ const Input = styled.input`
   border-radius: 3px;
   border: 0;
   margin-bottom: 13px;
+  color: #000;
+  font-size: 20px;
+  font-family: Raleway, sans-serif;
+  padding-left: 10px;
 
   &::placeholder {
     color: #000;

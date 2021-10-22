@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import * as S from "./style";
+import * as S from "../../styles/LoginAndSignUpStyle";
 
 const LoginPage = () => {
   return (
@@ -22,7 +22,7 @@ const LoginPage = () => {
         <S.Button>Entrar</S.Button>
       </S.Form>
 
-      <Link to="sign-up">
+      <Link to="/sign-up">
         <S.RegisterBtn>Primeira vez? Cadastre-se!</S.RegisterBtn>
       </Link>
     </S.Container>
