@@ -1,18 +1,24 @@
 import * as S from "./style";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Register from "../../components/Register/Register";
 
 const HomePage = () => {
 
+  const history = useHistory();
   const [hasRegister, setHasRegister] = useState(true)
   const arr = [1, 2, 3, 4];
+
+  const logout = () => {
+    localStorage.clear();
+    history.push("/")
+  }
 
   return (
     <S.PageContainer>
       <S.Header>
         Olá, Fulano
-        <ion-icon onClick={() => alert("logout")} name="log-out-outline"></ion-icon>
+        <ion-icon onClick={logout} name="log-out-outline"></ion-icon>
       </S.Header>
 
       <S.TransactionsContainer>
