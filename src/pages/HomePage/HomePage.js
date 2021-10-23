@@ -1,10 +1,12 @@
 import * as S from "./style";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Register from "../../components/Register/Register";
 
 const HomePage = () => {
 
   const [hasRegister, setHasRegister] = useState(true)
+  const arr = [1, 2, 3, 4];
 
   return (
     <S.PageContainer>
@@ -19,10 +21,9 @@ const HomePage = () => {
             ? <span>Não há registros de entrada ou saída</span>
             :
             <ul>
-              <li><div><S.Date>30/11</S.Date> <p>Almoço</p></div> <S.Value>39,90</S.Value></li>
-              <li><div><S.Date>30/11</S.Date> <p>Almoço</p></div> <S.Value>39,90</S.Value></li>
-              <li><div><S.Date>30/11</S.Date> <p>Almoço</p></div> <S.Value>39,90</S.Value></li>
-              <li><div><S.Date>30/11</S.Date> <p>Almoço</p></div> <S.Value>39,90</S.Value></li>
+              {arr.map(register => (
+                <Register isInflow={false} />
+              ))}
             </ul>
         }
       </S.TransactionsList>
