@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { logIn } from "../../services/api";
 import * as S from "../../styles/LoginAndSignUpStyle";
@@ -10,6 +10,12 @@ const LoginPage = () => {
     email: '',
     password: ''
   });
+
+  useEffect(() => {
+    const userLocalStorage = localStorage.getItem("user");
+    if (!userLocalStorage) return;
+    history.push("/home");
+  }, [])
 
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
@@ -26,6 +32,11 @@ const LoginPage = () => {
     const body = inputFields;
     logIn(body)
       .then(res => {
+        const user = {
+          token: res.data.token,
+          name: res.data.name
+        }
+        localStorage.setItem("user", JSON.stringify(user));
         if (res.status === 200) {
           history.push("/home");
         }
