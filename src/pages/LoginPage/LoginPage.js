@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 import { logIn } from "../../services/api";
 import * as S from "../../styles/LoginAndSignUpStyle";
 
 const LoginPage = () => {
 
   const history = useHistory();
+  const { setUser } = useContext(UserContext);
   const [inputFields, setInputFields] = useState({
     email: '',
     password: ''
@@ -33,9 +35,11 @@ const LoginPage = () => {
     logIn(body)
       .then(res => {
         const user = {
+          id: res.data.id,
           token: res.data.token,
-          name: res.data.name
+          name: res.data.name,
         }
+        setUser(user);
         localStorage.setItem("user", JSON.stringify(user));
         if (res.status === 200) {
           history.push("/home");

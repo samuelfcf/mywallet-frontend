@@ -1,18 +1,28 @@
 import * as S from "./style";
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Register from "../../components/Register/Register";
 import { logOut } from "../../services/api";
+import UserContext from "../../context/UserContext";
 
 const HomePage = () => {
 
   const history = useHistory();
+  const { user } = useContext(UserContext);
   const [hasRegister, setHasRegister] = useState(true)
   const arr = [1, 2, 3, 4];
 
+  console.log(user);
   const userLocalStorage = localStorage.getItem("user");
   const name = JSON.parse(userLocalStorage).name;
   const token = JSON.parse(userLocalStorage).token;
+  const id = JSON.parse(userLocalStorage).id;
+
+  console.log(userLocalStorage);
+
+  useEffect(() => {
+
+  }, [])
 
   const logout = () => {
     localStorage.clear();
