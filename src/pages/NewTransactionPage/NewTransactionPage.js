@@ -1,15 +1,43 @@
-import * as S from "./style"
+import { useState } from "react";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import * as S from "./style";
 
 const NewTransactionPage = () => {
+
+  const history = useHistory();
+  const [inputFields, setInputFields] = useState({
+    value: '',
+    description: ''
+  });
+
+  const handleChange = (event) => {
+    setInputFields({ ...inputFields, [event.target.name]: event.target.value });
+  }
+
   return (
     <S.PageContainer>
-      <S.Header>Nova Entrada</S.Header>
+      <S.Header>
+        Nova Entrada
+        <ion-icon onClick={() => history.push("/home")} name="arrow-back-outline"></ion-icon>
+      </S.Header>
       <S.Form>
-        <S.Input placeholder="Valor"></S.Input>
-        <S.Input placeholder="Descrição"></S.Input>
-        <S.Button>Salvar entrada</S.Button>
+        <S.Input required
+          type="number"
+          name="value"
+          value={inputFields.value}
+          onChange={handleChange}
+          placeholder="Valor"
+        />
+        <S.Input required
+          name="description"
+          value={inputFields.description}
+          onChange={handleChange}
+          placeholder="Descrição"
+        />
+        <S.Button type="submit">Salvar entrada</S.Button>
       </S.Form>
-    </S.PageContainer>
+    </S.PageContainer >
   );
 }
 

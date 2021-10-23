@@ -15,9 +15,16 @@ const Header = styled.header`
   width: 20.375rem;
   font-size: 26px;
   color: #FFFFFF;
-  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
   font-weight: bold;
   font-family: Raleway, sans-serif;
+
+  ion-icon {
+    font-size: 30px;
+    cursor: pointer;
+  }
 `
 
 const Form = styled.form`
