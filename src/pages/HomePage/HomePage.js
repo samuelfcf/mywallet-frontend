@@ -2,6 +2,7 @@ import * as S from "./style";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Register from "../../components/Register/Register";
+import { logOut } from "../../services/api";
 
 const HomePage = () => {
 
@@ -9,15 +10,20 @@ const HomePage = () => {
   const [hasRegister, setHasRegister] = useState(true)
   const arr = [1, 2, 3, 4];
 
+  const userLocalStorage = localStorage.getItem("user");
+  const name = JSON.parse(userLocalStorage).name;
+  const token = JSON.parse(userLocalStorage).token;
+
   const logout = () => {
     localStorage.clear();
+    logOut(token);
     history.push("/")
   }
 
   return (
     <S.PageContainer>
       <S.Header>
-        Olá, Fulano
+        Olá, {name}
         <ion-icon onClick={logout} name="log-out-outline"></ion-icon>
       </S.Header>
 
@@ -42,14 +48,20 @@ const HomePage = () => {
       </S.TransactionsContainer>
 
       <S.Footer>
-        <Link to="/new-transaction">
+        <Link to={{
+          pathname: "/new-transaction",
+          state: { inflow: true }
+        }}>
           <S.NewInflow>
             <ion-icon name="add-circle-outline"></ion-icon>
             <span>Nova entrada</span>
           </S.NewInflow>
         </Link>
 
-        <Link to="/new-transaction">
+        <Link to={{
+          pathname: "/new-transaction",
+          state: { inflow: false }
+        }}>
           <S.NewOutflow>
             <ion-icon name="remove-circle-outline"></ion-icon>
             <span>Nova saída</span>

@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import * as S from "./style";
 
-const NewTransactionPage = () => {
+const NewTransactionPage = (props) => {
 
+  const isInflow = props.location.state.inflow;
   const history = useHistory();
+
+  const [transactions, setTransactions] = useState([]);
   const [inputFields, setInputFields] = useState({
     value: '',
     description: ''
   });
+
+  useEffect(() => {
+
+  }, [])
 
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
@@ -17,7 +24,7 @@ const NewTransactionPage = () => {
   return (
     <S.PageContainer>
       <S.Header>
-        Nova Entrada
+        {isInflow ? "Nova entrada" : "Nova saída"}
         <ion-icon onClick={() => history.push("/home")} name="arrow-back-outline"></ion-icon>
       </S.Header>
       <S.Form>
@@ -34,7 +41,7 @@ const NewTransactionPage = () => {
           onChange={handleChange}
           placeholder="Descrição"
         />
-        <S.Button type="submit">Salvar entrada</S.Button>
+        <S.Button type="submit">Salvar {isInflow ? "entrada" : "saída"}</S.Button>
       </S.Form>
     </S.PageContainer >
   );

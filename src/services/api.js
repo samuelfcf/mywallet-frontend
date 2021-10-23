@@ -28,7 +28,12 @@ const logIn = async (req) => {
   return await axios.post(`${BASE_URL}/log-in`, body);
 }
 
+const logOut = async (token) => {
+  return await axios.get(`${BASE_URL}/log-out`, getConfig(token));
+}
+
 export {
   signUp,
   logIn,
+  logOut
 }
