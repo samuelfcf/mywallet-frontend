@@ -12,28 +12,20 @@ const HomePage = () => {
   const [hasRegister, setHasRegister] = useState(true)
   const arr = [1, 2, 3, 4];
 
-  console.log(user);
-  const userLocalStorage = localStorage.getItem("user");
-  const name = JSON.parse(userLocalStorage).name;
-  const token = JSON.parse(userLocalStorage).token;
-  const id = JSON.parse(userLocalStorage).id;
-
-  console.log(userLocalStorage);
-
   useEffect(() => {
 
   }, [])
 
   const logout = () => {
     localStorage.clear();
-    logOut(token);
+    logOut(user.token);
     history.push("/")
   }
 
   return (
     <S.PageContainer>
       <S.Header>
-        Olá, {name}
+        Olá, {user.name}
         <ion-icon onClick={logout} name="log-out-outline"></ion-icon>
       </S.Header>
 
