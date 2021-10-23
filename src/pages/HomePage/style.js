@@ -26,7 +26,7 @@ const Header = styled.header`
   }
 `
 
-const TransactionsList = styled.div`
+const TransactionsContainer = styled.div`
   height: 27.875rem;
   width: 20.375rem;
   background-color: #FFFFFF;
@@ -48,7 +48,6 @@ const TransactionsList = styled.div`
   }
 
   ul {
-    padding: 1.438rem 0.688rem;
 
     div, p {
       display: inline
@@ -67,6 +66,38 @@ const TransactionsList = styled.div`
     }
   }
 `
+
+const TransactionsList = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 1.438rem 0.700rem 0.625rem;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-family: Raleway;
+      font-weight: bold;
+      font-size: 17px;
+    }
+  }
+`
+
+const Saldo = styled.p`
+  font-family: Raleway;
+  font-weight: bold;
+  font-size: 17px;
+`
+
+const Total = styled(Saldo)`
+  color: ${({ isPositive }) => isPositive ? "#03AC00" : "#C70000"};
+  font-weight: normal;
+`
+
 const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
@@ -103,7 +134,10 @@ const NewOutflow = styled(NewInflow)``
 export {
   PageContainer,
   Header,
+  TransactionsContainer,
   TransactionsList,
+  Saldo,
+  Total,
   Footer,
   NewInflow,
   NewOutflow,

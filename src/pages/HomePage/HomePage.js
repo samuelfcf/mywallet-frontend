@@ -15,18 +15,25 @@ const HomePage = () => {
         <ion-icon onClick={() => alert("logout")} name="log-out-outline"></ion-icon>
       </S.Header>
 
-      <S.TransactionsList>
+      <S.TransactionsContainer>
         {
           !hasRegister
             ? <span>Não há registros de entrada ou saída</span>
             :
-            <ul>
-              {arr.map(register => (
-                <Register isInflow={false} />
-              ))}
-            </ul>
+            <S.TransactionsList>
+              <ul>
+                {arr.map(register => (
+                  <Register isInflow={false} />
+                ))}
+              </ul>
+
+              <div>
+                <S.Saldo>SALDO</S.Saldo>
+                <S.Total isPositive={true}>2849,96</S.Total>
+              </div>
+            </S.TransactionsList>
         }
-      </S.TransactionsList>
+      </S.TransactionsContainer>
 
       <S.Footer>
         <Link to="/new-transaction">
