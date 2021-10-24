@@ -13,6 +13,10 @@ const LoginPage = () => {
     password: ''
   });
 
+  useEffect(() => {
+    checkLocalStorage();
+  }, [])
+
   const checkLocalStorage = () => {
     const userLocalStorage = localStorage.getItem("user");
     if (userLocalStorage === null) {
@@ -23,7 +27,6 @@ const LoginPage = () => {
       history.push("/home");
     }
   }
-  checkLocalStorage();
 
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
