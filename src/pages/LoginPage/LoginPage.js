@@ -13,11 +13,17 @@ const LoginPage = () => {
     password: ''
   });
 
-  useEffect(() => {
+  const checkLocalStorage = () => {
     const userLocalStorage = localStorage.getItem("user");
-    if (!userLocalStorage) return;
-    history.push("/home");
-  }, [])
+    if (userLocalStorage === null) {
+      return
+    } else {
+      const user = JSON.parse(userLocalStorage);
+      setUser(user);
+      history.push("/home");
+    }
+  }
+  checkLocalStorage();
 
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
@@ -35,9 +41,8 @@ const LoginPage = () => {
     logIn(body)
       .then(res => {
         const user = {
-          id: res.data.id,
           token: res.data.token,
-          name: res.data.name,
+          ...res.data
         }
         setUser(user);
         localStorage.setItem("user", JSON.stringify(user));

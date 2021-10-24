@@ -10,30 +10,35 @@ const getConfig = (token) => {
   };
 }
 
-const signUp = async (req) => {
+const signUp = (req) => {
   const body = {
     name: req.name,
     email: req.email,
     password: req.password
   };
 
-  return await axios.post(`${BASE_URL}/sign-up`, body);
+  return axios.post(`${BASE_URL}/sign-up`, body);
 }
 
-const logIn = async (req) => {
+const logIn = (req) => {
   const body = {
     email: req.email,
     password: req.password
   }
-  return await axios.post(`${BASE_URL}/log-in`, body);
+  return axios.post(`${BASE_URL}/log-in`, body);
 }
 
-const logOut = async (token) => {
-  return await axios.get(`${BASE_URL}/log-out`, getConfig(token));
+const logOut = (token) => {
+  return axios.get(`${BASE_URL}/log-out`, getConfig(token));
+}
+
+const getTransactions = (id, token) => {
+  return axios.get(`${BASE_URL}/user/${id}/transactions`, getConfig(token));
 }
 
 export {
   signUp,
   logIn,
-  logOut
+  logOut,
+  getTransactions
 }

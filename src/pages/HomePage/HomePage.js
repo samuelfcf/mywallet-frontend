@@ -2,25 +2,49 @@ import * as S from "./style";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Register from "../../components/Register/Register";
-import { logOut } from "../../services/api";
+import { logOut, getTransactions } from "../../services/api";
 import UserContext from "../../context/UserContext";
 
 const HomePage = () => {
 
   const history = useHistory();
+  const [transactions, setTransactions] = useState([]);
+  const [balance, setBalence] = useState(0);
   const { user } = useContext(UserContext);
-  const [hasRegister, setHasRegister] = useState(true)
-  const arr = [1, 2, 3, 4];
+
+  if (!user.token) {
+    history.push("/");
+  }
+
+  const calcBalance = (balance) => {
+    let total = 0;
+    balance.forEach(e => {
+      if (e.inflow) {
+        total += parseFloat(e.value);
+      } else {
+        total -= parseFloat(e.value);
+      }
+    });
+    setBalence(total.toFixed(2));
+  }
 
   useEffect(() => {
-
-  }, [])
+    getTransactions(user.id, user.token)
+      .then(res => {
+        setTransactions(res.data);
+        calcBalance(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   const logout = () => {
-    localStorage.clear();
     logOut(user.token);
+    localStorage.clear();
     history.push("/")
   }
+
+  console.log(transactions)
+  console.log(balance)
 
   return (
     <S.PageContainer>
@@ -31,19 +55,21 @@ const HomePage = () => {
 
       <S.TransactionsContainer>
         {
-          !hasRegister
+          transactions.length === 0
             ? <span>Não há registros de entrada ou saída</span>
             :
             <S.TransactionsList>
               <ul>
-                {arr.map(register => (
-                  <Register isInflow={false} />
+                {transactions.map(register => (
+                  <Register
+                    register={register}
+                    isInflow={register.inflow} />
                 ))}
               </ul>
 
               <div>
                 <S.Saldo>SALDO</S.Saldo>
-                <S.Total isPositive={true}>2849,96</S.Total>
+                <S.Total isPositive={true}>{(balance % 1 === 0) ? `${balance}.00` : balance}</S.Total>
               </div>
             </S.TransactionsList>
         }

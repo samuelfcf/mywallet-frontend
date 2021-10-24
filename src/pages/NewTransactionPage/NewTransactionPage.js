@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router";
+import UserContext from "../../context/UserContext";
 import * as S from "./style";
 
 const NewTransactionPage = (props) => {
 
-  const isInflow = props.location.state.inflow;
   const history = useHistory();
-
-  const [transactions, setTransactions] = useState([]);
+  const { user } = useContext(UserContext);
+  const isInflow = props.location.state?.inflow;
   const [inputFields, setInputFields] = useState({
     value: '',
     description: ''
   });
 
-  useEffect(() => {
-
-  }, [])
+  if (!user.token) {
+    history.push("/");
+  }
 
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });

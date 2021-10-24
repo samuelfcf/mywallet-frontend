@@ -1,14 +1,18 @@
 import * as S from "./style";
+import { formatDate, formatValue } from "../../services/utils";
 
-const Register = ({ isInflow }) => {
+const Register = ({ isInflow, register }) => {
+
+  const { date, description, value } = register;
+
   return (
     <li>
       <div>
-        <S.Date>30/11</S.Date>
-        <p>Almoço</p>
+        <S.Date>{formatDate(date)}</S.Date>
+        <p>{description}</p>
       </div>
 
-      <S.Value isInflow={isInflow}>39,90</S.Value>
+      <S.Value isInflow={isInflow}>{formatValue(value)}</S.Value>
     </li>
   );
 }
