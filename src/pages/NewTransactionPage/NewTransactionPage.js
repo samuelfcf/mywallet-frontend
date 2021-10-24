@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import UserContext from "../../context/UserContext";
+import { postTransactions } from "../../services/api";
 import * as S from "./style";
 
 const NewTransactionPage = (props) => {
@@ -17,10 +18,31 @@ const NewTransactionPage = (props) => {
     history.push("/");
   }
 
-  console.log(isInflow, user);
-
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
+  }
+
+  const addNewTransaction = (event) => {
+    event.preventDefault();
+
+    const { value, description } = inputFields;
+    if (!value || !description) {
+      return alert("Por favor, preencha todos os campos!!");
+    }
+
+    const body = {
+      ...inputFields,
+      inflow: isInflow,
+      date: new Date()
+    }
+
+    postTransactions(body, user.id, user.token)
+      .then(res => {
+        alert("Registro cadastrado!!");
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   return (
@@ -29,7 +51,8 @@ const NewTransactionPage = (props) => {
         {isInflow ? "Nova entrada" : "Nova saída"}
         <ion-icon onClick={() => history.push("/home")} name="arrow-back-outline"></ion-icon>
       </S.Header>
-      <S.Form>
+
+      <S.Form onSubmit={addNewTransaction}>
         <S.Input required
           type="number"
           name="value"

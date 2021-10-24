@@ -25,6 +25,7 @@ const logIn = (req) => {
     email: req.email,
     password: req.password
   }
+
   return axios.post(`${BASE_URL}/log-in`, body);
 }
 
@@ -38,12 +39,13 @@ const getTransactions = (id, token) => {
 
 const postTransactions = (req, id, token) => {
   const body = {
-    value: req.value,
+    value: parseFloat(req.value),
     description: req.description,
-    inflow: req.inflow
+    inflow: req.inflow,
+    date: req.date,
   }
 
-  return axios.get(`${BASE_URL}/user/${id}/transactions`, body, getConfig(token));
+  return axios.post(`${BASE_URL}/user/${id}/transactions`, body, getConfig(token));
 }
 
 export {

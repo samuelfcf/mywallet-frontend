@@ -48,6 +48,8 @@ const TransactionsContainer = styled.div`
   }
 
   ul {
+    overflow-y: scroll;
+    margin-bottom: 40px;
 
     div, p {
       display: inline
