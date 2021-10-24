@@ -25,6 +25,7 @@ const HomePage = () => {
         total -= parseFloat(e.value);
       }
     });
+
     setBalence(total.toFixed(2));
   }
 
@@ -66,7 +67,9 @@ const HomePage = () => {
 
               <div>
                 <S.Saldo>SALDO</S.Saldo>
-                <S.Total isPositive={true}>{(balance % 1 === 0) ? `${balance}.00` : balance}</S.Total>
+                <S.Total isPositive={(balance >= 0) ? true : false}>
+                  {(balance % 1 === 0) ? `${balance}.00` : balance}
+                </S.Total>
               </div>
             </S.TransactionsList>
         }
