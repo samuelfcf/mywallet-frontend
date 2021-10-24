@@ -17,6 +17,8 @@ const NewTransactionPage = (props) => {
     history.push("/");
   }
 
+  console.log(isInflow, user);
+
   const handleChange = (event) => {
     setInputFields({ ...inputFields, [event.target.name]: event.target.value });
   }

@@ -43,9 +43,6 @@ const HomePage = () => {
     history.push("/")
   }
 
-  console.log(transactions)
-  console.log(balance)
-
   return (
     <S.PageContainer>
       <S.Header>
