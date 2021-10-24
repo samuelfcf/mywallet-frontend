@@ -1,9 +1,10 @@
 import * as S from "./style";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import Register from "../../components/Register/Register";
 import { logOut, getTransactions } from "../../services/api";
+import { calcBalance } from "../../services/utils";
 import UserContext from "../../context/UserContext";
+import Transaction from "../../components/Transaction/Transaction";
 
 const HomePage = () => {
 
@@ -16,24 +17,12 @@ const HomePage = () => {
     history.push("/");
   }
 
-  const calcBalance = (balance) => {
-    let total = 0;
-    balance.forEach(e => {
-      if (e.inflow) {
-        total += parseFloat(e.value);
-      } else {
-        total -= parseFloat(e.value);
-      }
-    });
-
-    setBalence(total.toFixed(2));
-  }
-
   useEffect(() => {
     getTransactions(user.id, user.token)
       .then(res => {
         setTransactions(res.data);
-        calcBalance(res.data);
+        const currentBalance = calcBalance(transactions);
+        setBalence(currentBalance);
       })
       .catch(err => console.log(err));
   }, []);
@@ -58,10 +47,10 @@ const HomePage = () => {
             :
             <S.TransactionsList>
               <ul>
-                {transactions.map(register => (
-                  <Register
-                    register={register}
-                    isInflow={register.inflow} />
+                {transactions.map(transaction => (
+                  <Transaction
+                    register={transaction}
+                    isInflow={transaction.inflow} />
                 ))}
               </ul>
 

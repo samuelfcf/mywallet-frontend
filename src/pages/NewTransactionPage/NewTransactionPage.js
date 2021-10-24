@@ -29,7 +29,6 @@ const NewTransactionPage = (props) => {
     if (!value || !description) {
       return alert("Por favor, preencha todos os campos!!");
     }
-
     const body = {
       ...inputFields,
       inflow: isInflow,

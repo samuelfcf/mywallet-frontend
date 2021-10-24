@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { formatDate, formatValue } from "../../services/utils";
 
-const Register = ({ isInflow, register }) => {
+const Transaction = ({ isInflow, register }) => {
 
   const { date, description, value } = register;
 
@@ -17,4 +17,4 @@ const Register = ({ isInflow, register }) => {
   );
 }
 
-export default Register;
+export default Transaction;

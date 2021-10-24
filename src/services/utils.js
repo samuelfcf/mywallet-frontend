@@ -13,7 +13,21 @@ const formatValue = (value) => {
   return arr.join('');
 }
 
+const calcBalance = (transactions) => {
+  let total = 0;
+  transactions.forEach(t => {
+    if (t.inflow) {
+      total += parseFloat(t.value);
+    } else {
+      total -= parseFloat(t.value);
+    }
+  });
+
+  return total.toFixed(2);
+}
+
 export {
   formatDate,
-  formatValue
+  formatValue,
+  calcBalance
 }
