@@ -25,7 +25,7 @@ const HomePage = () => {
         setBalence(currentBalance);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [transactions]);
 
   const logout = () => {
     logOut(user.token);
@@ -57,7 +57,7 @@ const HomePage = () => {
               <div>
                 <S.Saldo>SALDO</S.Saldo>
                 <S.Total isPositive={(balance >= 0) ? true : false}>
-                  {(balance % 1 === 0) ? `${balance}.00` : balance}
+                  {(balance % 1 === 0 && balance === 0) ? `${balance}.00` : balance}
                 </S.Total>
               </div>
             </S.TransactionsList>
