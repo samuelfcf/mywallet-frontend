@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://mywallet-backendd.herokuapp.com/";
+const BASE_URL = "https://mywallet-backendd.herokuapp.com";
 
 const getConfig = (token) => {
   return {
