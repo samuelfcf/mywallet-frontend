@@ -25,7 +25,7 @@ const HomePage = () => {
         setBalence(currentBalance);
       })
       .catch(err => console.log(err));
-  }, [transactions]);
+  }, []);
 
   const logout = () => {
     logOut(user.token);

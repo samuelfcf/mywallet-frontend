@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = "https://mywallet-backendd.herokuapp.com";
+const BASE_URL = "http://localhost:4000";
+
+//https://mywallet-backendd.herokuapp.com
 
 const getConfig = (token) => {
   return {
@@ -26,7 +28,7 @@ const logIn = (req) => {
     password: req.password
   }
 
-  return axios.post(`${BASE_URL}/log-in`, body);
+  return axios.post(`${BASE_URL}/sign-in`, body);
 }
 
 const logOut = (token) => {
