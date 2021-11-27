@@ -93,7 +93,6 @@ const NewTransactionPage = (props) => {
           onChange={handleChange}
           placeholder="Descrição"
           minLength="3"
-          autoFocus
           autoComplete="off"
         />
         <S.Button type="submit">
