@@ -1,10 +1,7 @@
 <h1 align="center">My Wallet</h1>
 
-<h1>
-<div style="display: flex; justify-content: space-around">
-  <img src="public/login.png" style="width: 300px"></img>
-  <img src="public/home.png" style="width: 300px"></img>
-</div>
+<h1 align="center">
+  <img src="src/assets/apresentacao.gif" />
 </h1>
 
 ## 🔖 Sobre

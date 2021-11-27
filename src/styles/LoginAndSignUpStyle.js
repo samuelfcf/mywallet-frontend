@@ -9,7 +9,7 @@ const Container = styled.div`
   gap: 30px;
   max-width: 630px;
   height: 100vh;
-  background-color: #8C11BE;
+  background-color: #4c624f;
 `
 
 const Title = styled.h1`
@@ -40,6 +40,7 @@ const Input = styled.input`
   font-size: 20px;
   font-family: Raleway, sans-serif;
   padding-left: 10px;
+  background-color: #fff5eb;
 
   &::placeholder {
     color: #000;
@@ -54,11 +55,18 @@ const Button = styled.button`
   height: 46px;
   border: 0;
   border-radius: 3px;
-  background-color: #A328D6;
+  background-color: #2e3029;
   color: #FFF;
   font-size: 20px;
   font-family: Raleway, sans-serif;
   font-weight: bold;
+  box-shadow: 0 0 40px 40px #2e3029 inset, 0 0 0 0 #2e3029;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+
+  :hover {
+    box-shadow: 0 0 10px 0 #2e3029 inset, 0 0 10px 4px #2e3029;
+  }
 `
 
 export {

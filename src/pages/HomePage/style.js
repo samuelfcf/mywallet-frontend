@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PageContainer = styled.div`
-  background-color: #8C11BE;
+  background-color: #4c624f;
   height: 100vh;
   max-width: 39.375rem;
   padding: 1.438rem 1.375rem;
@@ -29,7 +29,7 @@ const Header = styled.header`
 const TransactionsContainer = styled.div`
   height: 27.875rem;
   width: 20.375rem;
-  background-color: #FFFFFF;
+  background-color: #fff5eb;
   margin-top: 18px;
   margin-left: 2px;
   border-radius: 6px;
@@ -110,7 +110,7 @@ const Footer = styled.footer`
 const NewInflow = styled.div`
   height: 7.125rem;
   width: 9.75rem;
-  background-color: #A328D6;
+  background-color: #2e3029;
   color: #FFFFFF;
   font-family: Raleway, sans-serif;
   display: flex;
@@ -120,6 +120,13 @@ const NewInflow = styled.div`
   font-size: 17px;
   font-weight: bold;
   border-radius: 6px;
+  box-shadow: 0 0 40px 40px #2e3029 inset, 0 0 0 0 #2e3029;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+
+  :hover {
+    box-shadow: 0 0 10px 0 #2e3029 inset, 0 0 10px 4px #2e3029;
+  }
 
   ion-icon {
     font-size: 25px;

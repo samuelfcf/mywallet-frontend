@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://mywallet-backendd.herokuapp.com";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const getConfig = (token) => {
   return {
@@ -26,11 +26,7 @@ const logIn = (req) => {
     password: req.password
   }
 
-  return axios.post(`${BASE_URL}/log-in`, body);
-}
-
-const logOut = (token) => {
-  return axios.get(`${BASE_URL}/log-out`, getConfig(token));
+  return axios.post(`${BASE_URL}/sign-in`, body);
 }
 
 const getTransactions = (id, token) => {
@@ -51,7 +47,6 @@ const postTransactions = (req, id, token) => {
 export {
   signUp,
   logIn,
-  logOut,
   getTransactions,
   postTransactions
 }

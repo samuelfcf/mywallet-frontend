@@ -1,29 +1,21 @@
 
 import { useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Routes, Route, Switch } from "react-router-dom";
 import UserContext from "./context/UserContext";
-import HomePage from "./pages/HomePage/HomePage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import NewTransactionPage from "./pages/NewTransactionPage/NewTransactionPage";
-import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import Pages from "./Pages";
 import GlobalStyle from "./styles/GlobalStyle";
 
 const App = () => {
-
-  const [user, setUser] = useState("");
+  const userStorage = JSON.parse(localStorage.getItem("@user"));
+  const [user, setUser] = useState(userStorage);
 
   return (
-    <BrowserRouter>
+    <Routes>
       <UserContext.Provider value={{ user, setUser }}>
         <GlobalStyle />
-        <Switch>
-          <Route path="/" exact component={LoginPage} />
-          <Route path="/sign-up" exact component={SignUpPage} />
-          <Route path="/home" exact component={HomePage} />
-          <Route path="/new-transaction" exact component={NewTransactionPage} />
-        </Switch>
+        <Pages />
       </UserContext.Provider>
-    </BrowserRouter>
+    </Routes>
   );
 }
 
