@@ -31,10 +31,6 @@ const logIn = (req) => {
   return axios.post(`${BASE_URL}/sign-in`, body);
 }
 
-const logOut = (token) => {
-  return axios.get(`${BASE_URL}/log-out`, getConfig(token));
-}
-
 const getTransactions = (id, token) => {
   return axios.get(`${BASE_URL}/user/${id}/transactions`, getConfig(token));
 }
@@ -53,7 +49,6 @@ const postTransactions = (req, id, token) => {
 export {
   signUp,
   logIn,
-  logOut,
   getTransactions,
   postTransactions
 }

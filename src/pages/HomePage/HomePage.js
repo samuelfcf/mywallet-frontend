@@ -1,8 +1,9 @@
 import * as S from "./style";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { logOut, getTransactions } from "../../services/api";
+import { getTransactions } from "../../services/api";
 import { calcBalance } from "../../services/utils";
+import Swal from 'sweetalert2';
 import UserContext from "../../context/UserContext";
 import Transaction from "../../components/Transaction/Transaction";
 
@@ -12,23 +13,32 @@ const HomePage = () => {
   const [transactions, setTransactions] = useState([]);
   const [balance, setBalence] = useState(0);
   const { user } = useContext(UserContext);
-
-  if (!user.token) {
-    history.push("/");
-  }
-
+  
   useEffect(() => {
-    getTransactions(user.id, user.token)
-      .then(res => {
-        setTransactions(res.data);
-        const currentBalance = calcBalance(transactions);
-        setBalence(currentBalance);
-      })
-      .catch(err => console.log(err));
-  }, []);
+    if (!user) {
+      return Swal.fire({
+        title: 'Login necessário',
+        text: 'Para acessar essa página, você precisa estar logado',
+        icon: 'warning',
+        confirmButtonText: 'Fazer Login',
+        confirmButtonColor: '#2A6DB0',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push('/');
+        }
+    });
+  }
+  getTransactions(user.id, user.token)
+    .then(res => {
+      setTransactions(res.data);
+      const registers = transactions
+      const currentBalance = calcBalance(registers);
+      setBalence(currentBalance);
+    })
+    .catch(err => console.log(err));
+  }, [balance]);
 
   const logout = () => {
-    logOut(user.token);
     localStorage.clear();
     history.push("/")
   }
@@ -36,7 +46,7 @@ const HomePage = () => {
   return (
     <S.PageContainer>
       <S.Header>
-        Olá, {user.name}
+        Olá, {user?.name}
         <ion-icon onClick={logout} name="log-out-outline"></ion-icon>
       </S.Header>
 
